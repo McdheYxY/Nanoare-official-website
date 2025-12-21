@@ -105,7 +105,7 @@ useHead({
         /* gitducs配置 */
         {
             src: 'https://giscus.app/client.js',
-            'data-repo': "McdheYxY/Nanoare-official-website",
+            'data-repo': `${config.public.TL_OWNER}/${config.public.TL_NAME}`,
             'data-repo-id': "R_kgDOQNIUNw",
             'data-mapping': "number",
             'data-term': route.params.id,
