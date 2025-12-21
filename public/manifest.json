@@ -1,0 +1,57 @@
+{
+	"id": "/",
+	"name": "Nanoare PWA",
+	"short_name": "Nanoare",
+	"start_url": ".",
+	"display_override": ["window-controls-overlay"],
+	"display": "standalone",
+	"background_color": "white",
+	"theme_color": "#2680d5",
+	"description": "Nanoare 的网络日志(blogs)、编程日记(notes)、作品合集(projects)发布页",
+	"icons": [
+		{
+			"src": "/favicon/favicon_512.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		},
+		{
+			"src": "/favicon/favicon_196.png",
+			"type": "image/png",
+			"sizes": "196x196"
+		},
+		{
+			"src": "/favicon/favicon_32.png",
+			"type": "image/png",
+			"sizes": "32x32"
+		},
+		{
+			"src": "/favicon/favicon_16.png",
+			"type": "image/png",
+			"sizes": "16x16"
+		}
+	],
+	"screenshots": [
+		{
+			"src": "/img/screenshot1.jpg",
+			"sizes": "1080x2340",
+			"type": "image/jpg"
+		},
+		{
+			"src": "/img/screenshot2.jpg",
+			"sizes": "1080x2340",
+			"type": "image/jpg"
+		},
+		{
+			"src": "/img/screenshot3.jpg",
+			"sizes": "1080x2340",
+			"type": "image/jpg",
+			"form_factor": "wide"
+		},
+		{
+			"src": "/img/screenshot4.jpg",
+			"sizes": "1080x2340",
+			"type": "image/jpg",
+			"form_factor": "wide"
+		}
+	]
+}

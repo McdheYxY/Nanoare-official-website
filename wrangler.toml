@@ -1,0 +1,10 @@
+[[kv_namespaces]]
+binding = "NANOARE_WEBSITE_CACHE"
+id = "8beb02eb5f2543019932ab9a5dc142ac"
+
+[observability]
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+persist = true

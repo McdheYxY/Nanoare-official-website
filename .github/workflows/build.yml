@@ -1,0 +1,23 @@
+on: 
+    push:
+        branches:
+            - main
+env:
+    NUXT_PUBLIC_TL_OWNER:  ${{ secrets.NUXT_PUBLIC_TL_OWNER }}
+    NUXT_PUBLIC_TL_NAME: ${{ secrets.NUXT_PUBLIC_TL_NAME }}
+    TL_TOKEN: ${{ secrets.TL_TOKEN }}
+jobs:
+  build-website:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm i
+      - run: npm run build:prod
+      - name: Build & Deploy Worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

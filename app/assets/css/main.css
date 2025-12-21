@@ -1,0 +1,318 @@
+:root {
+    color-scheme: light dark;/* 解决滚动条深色模式下太亮 */
+	--article-text-color: #1a1d21;
+	--background-color: #fff;
+	--card-background-color: #fff;
+	--text-link: #2680d5;
+	--blockquote-bg: #f5f2f0;
+	--blockquote-bd: #e0dfcc;
+	--bg-stroke: #d0d0d0;
+	--bg-stroke2: rgba(208, 208, 208, 0.2);
+	--article-table-bd: #d1d9e0;
+	--article-table-cell: #f6f8fa;
+}
+* {
+	box-sizing: border-box;
+}
+html {
+	/* 禁止移动端文本自动调整，没有它你会发现同样的页眉框架唯独这个字体变大了 */
+	-webkit-text-size-adjust: 100%; /* iOS Safari */
+	-moz-text-size-adjust: 100%; /* Firefox */
+	-ms-text-size-adjust: 100%; /* IE */
+	text-size-adjust: 100%; /* 标准语法 */
+}
+
+body {
+	background: linear-gradient(-90deg, var(--bg-stroke) 1px, transparent 1px) 0 0/100px
+			100px,
+		linear-gradient(var(--bg-stroke) 1px, transparent 1px) 0 0/100px 100px,
+		linear-gradient(-90deg, var(--bg-stroke2) 1px, transparent 1px) 0/25px
+			1px,
+		linear-gradient(var(--bg-stroke2) 1px, transparent 1px) 0 0/1px 25px,
+		var(--background-color);
+	background-position: -10px -6px;
+	background-attachment: fixed;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans",
+		Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+	font-size: 1rem;
+	line-height: 1.5;
+	color: var(--article-text-color);
+	margin: 0;
+}
+
+@media screen and (min-width: 640px) {
+	.wrap-outer {
+		margin-left: calc(100vw - 100%);
+	}
+}
+
+.main {
+	width: calc(100% - 20px);
+	/* min-width: 300px; */
+	max-width: 800px;
+	margin: 0 auto;
+	/* padding: 10px; */
+}
+.main2 {
+	width: calc(100% - 20px);
+	margin: 0 auto;
+	/* padding: 10px; */
+}
+.content{
+	background-color: var(--background-color);
+	box-shadow: 0 0 10px 5px var(--background-color);
+}
+
+h1 {
+	font-weight: 700;
+	line-height: 1.15;
+}
+p {
+	line-height: 1.5;
+	text-align: left;
+}
+a {
+	text-decoration: none;
+	color: var(--article-text-color);
+}
+.links a {
+	color: var(--text-link);
+}
+.footer p {
+	text-align: center;
+}
+.markdown-alert{
+    margin-left: .3rem;
+}
+@media (prefers-color-scheme: dark) {
+	:root {
+		--article-text-color: #d8d8d8;
+		--background-color: #0d1117;
+		--card-background-color: rgba(1, 4, 9, 0.5);
+		--text-link: #03c4a1;
+		--blockquote-bg: #37373d;
+		--blockquote-bd: #181818;
+		--bg-stroke: #424242;
+		--bg-stroke2: rgba(66, 66, 66, 0.2);
+		--article-table-bd: #3d444d;
+		--article-table-cell: #151b23;
+	}
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: .6;
+}
+
+article {
+	color: var(--article-text-color);
+}
+
+.comments {
+	padding-top: 2rem;
+	overflow: hidden;
+}
+
+.task-list-item {
+	list-style: none;
+	margin-left: 0.3rem;
+}
+
+article h1 {
+	overflow-wrap: break-word;
+}
+
+article h2,
+article h3,
+article h4,
+article h5,
+article h6 {
+	font-weight: 600;
+	margin-top: 1.5rem;
+	margin-bottom: 1rem;
+	line-height: 1.25;
+}
+
+article h1,
+article h2 {
+	border-bottom: 1px solid #d3d3d3;
+}
+
+article h1 {
+	padding-bottom: 0.3em;
+	font-size: 2em;
+}
+
+article h2 {
+	font-size: 1.5rem;
+	padding-bottom: 0.3em;
+}
+
+article h3 {
+	font-size: 1.25rem;
+}
+
+article h4 {
+	font-size: 1rem;
+}
+
+article h5 {
+	font-size: 0.875rem;
+}
+
+article h6 {
+	font-size: 0.85rem;
+}
+
+article a {
+	color: var(--text-link);
+	overflow-wrap: break-word;
+}
+
+article p {
+	margin-bottom: 1rem;
+	padding-inline-start: 0.3rem;
+	line-height: 1.7rem;
+}
+
+article p,
+article ul,
+article ol {
+	overflow-wrap: break-word;
+}
+
+article img {
+	max-width: 100%;
+	border-radius: 0.3rem;
+}
+
+article .katex-block {
+	overflow-x: auto;
+}
+
+article .mermaid {
+	overflow-x: auto;
+}
+
+article .mermaid svg {
+	min-width: 23rem;
+}
+
+article img.full-width {
+	width: 100%;
+}
+
+article pre code {
+	display: block;
+	border-radius: 0.3rem;
+	overflow-x: auto;
+	padding: 1.5rem 1rem 1rem;
+}
+
+article pre {
+	background: #8e96aa24;
+	position: relative;
+}
+
+article table {
+	display: block;
+	overflow-x: auto;
+	border-collapse: collapse;
+}
+
+article table tr:nth-child(2n) {
+	background-color: var(--article-table-cell);
+}
+
+article table td,
+article table th {
+	padding: 6px 13px;
+	border: 1px solid var(--article-table-bd);
+}
+
+article ul,
+article ol {
+	padding: 0;
+}
+
+article li {
+	margin-left: 1.8rem;
+}
+
+article li + li {
+	margin-top: 0.25em;
+}
+
+article blockquote {
+	padding: 0 1rem;
+	color: #6a737d;
+	border-left: 0.25em solid var(--text-link);
+	margin: 0 0 16px 0.3rem;
+	overflow-wrap: break-word;
+}
+
+article :not(pre) > code {
+	margin: 0;
+	padding: 3px 6px;
+	border-radius: 4px;
+	background: rgba(142, 150, 170, 0.14);
+	font-size: 0.875em;
+	overflow-wrap: break-word;
+}
+
+.article-meta {
+	margin-bottom: 2rem;
+}
+
+.article-meta p {
+	color: #567;
+	line-height: 0.8rem;
+	font-size: 0.9rem;
+	letter-spacing: 0.06rem;
+	padding-inline-start: 0.7rem;
+}
+
+.article-content {
+	/* overflow: hidden; */
+}
+
+.code-container {
+	position: relative;
+	margin: 25px 0;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.copy-btn {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: transparent;
+	border: none;
+	border-radius: 4px;
+	color: var(--article-text-color);
+	padding: 6px 12px;
+	font-size: 0.75rem;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	z-index: 10;
+	user-select: none;
+}
+
+article pre .lang-text {
+	position: absolute;
+	font-size: 0.75rem;
+	top: 0;
+	left: 0;
+	padding: 6px 12px;
+	user-select: none;
+}
+
+.copy-btn:hover {
+	/* background: rgba(255, 255, 255, 0.3); */
+}
+
+.copy-btn.copied {
+	color: var(--text-link);
+}
