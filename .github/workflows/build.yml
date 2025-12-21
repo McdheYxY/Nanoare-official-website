@@ -3,6 +3,8 @@ on:
         branches:
             - main
 env:
+    NUXT_PUBLIC_LINK: ${{ secrets.NUXT_PUBLIC_LINK }}
+    NUXT_PUBLIC_AUTHOR: ${{ secrets.NUXT_PUBLIC_AUTHOR }}
     NUXT_PUBLIC_TL_OWNER:  ${{ secrets.NUXT_PUBLIC_TL_OWNER }}
     NUXT_PUBLIC_TL_NAME: ${{ secrets.NUXT_PUBLIC_TL_NAME }}
     TL_TOKEN: ${{ secrets.TL_TOKEN }}

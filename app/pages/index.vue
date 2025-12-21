@@ -1,6 +1,6 @@
 <script setup>
 // TODO 这个文档访问次数较多，页面所需的数据对每个用户来说都是相同的。更多：https://cn.vuejs.org/guide/scaling-up/ssr.html#ssr-vs-ssg
-// const runtimeConfig = useRuntimeConfig()
+const config = useRuntimeConfig()
 useHead({
     title: 'Nanoare official website',
     meta: [
