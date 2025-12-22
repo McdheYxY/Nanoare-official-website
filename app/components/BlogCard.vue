@@ -1,34 +1,35 @@
 <template>
-    <nuxt-link :to="'/blog/' + props.id">
-        <div class="blog-card">
-            <div class="blog-card-date">{{ props.date }}</div>
-            <div class="blog-card-time">{{ props.time }}</div>
-            <div class="blog-card-content-container">
-                <div class="blog-card-content">
-                    <div class="blog-card-title">{{ props.title }}</div>
-                    <div class="blog-card-abstract">
-                        {{ props.abstract }}
+    <Transition name="card">
+        <nuxt-link :to="'/blog/' + props.id">
+            <div class="blog-card">
+                <div class="blog-card-date">{{ props.date }}</div>
+                <div class="blog-card-time">{{ props.time }}</div>
+                <div class="blog-card-content-container">
+                    <div class="blog-card-content">
+                        <div class="blog-card-title">{{ props.title }}</div>
+                        <div class="blog-card-abstract">
+                            {{ props.abstract }}
+                        </div>
+                    </div>
+                    <div class="cover" v-if="props.cover" @click="imgErrorReTry($event)"
+                        v-imgloader="{ imgsrc: props.cover, failed: imgLoadFailed, succeed: imgLoadSucceed }"
+                        ref="coverBox">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAAC0AQMAAADfKmdSAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAB5JREFUWMPtwTEBAAAAwiD7p7bGDmAAAAAAAAAAYQcc1AABGAY3dgAAAABJRU5ErkJggg=="
+                            alt="cover" />
+                        <span ref="loading" class="loading">loading...</span>
                     </div>
                 </div>
-                <div class="cover" v-if="props.cover" @click="imgErrorReTry($event)"
-                    v-imgloader="{ imgsrc: props.cover, failed: imgLoadFailed, succeed: imgLoadSucceed }"
-                    ref="coverBox">
-                    <img
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAAC0AQMAAADfKmdSAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAB5JREFUWMPtwTEBAAAAwiD7p7bGDmAAAAAAAAAAYQcc1AABGAY3dgAAAABJRU5ErkJggg==" alt="cover"/>
-                    <span ref="loading" class="loading">loading...</span>
+                <div class="blog-card-tags">
+                    <span v-for="tag in props.tags"
+                        :style="`background-color:#${tag.color};--label-r:${color.hex.rgb(tag.color)[0]};--label-g:${color.hex.rgb(tag.color)[1]};--label-b:${color.hex.rgb(tag.color)[2]};--perceived-lightness:calc(((var(--label-r) * 0.2126) + (var(--label-g) * 0.7152) + (var(--label-b) * 0.0722)) / 255);--lightness-switch:max(0, min(calc((var(--perceived-lightness) - 0.453) * -1000), 1));color:hsl(0deg, 0%, calc(var(--lightness-switch) * 100%));`">{{
+                            tag.name }}</span>
                 </div>
             </div>
-            <div class="blog-card-tags">
-                <span v-for="tag in props.tags"
-                    :style="`background-color:#${tag.color};--label-r:${color.hex.rgb(tag.color)[0]};--label-g:${color.hex.rgb(tag.color)[1]};--label-b:${color.hex.rgb(tag.color)[2]};--perceived-lightness:calc(((var(--label-r) * 0.2126) + (var(--label-g) * 0.7152) + (var(--label-b) * 0.0722)) / 255);--lightness-switch:max(0, min(calc((var(--perceived-lightness) - 0.453) * -1000), 1));color:hsl(0deg, 0%, calc(var(--lightness-switch) * 100%));`">{{
-                        tag.name }}</span>
-            </div>
-        </div>
-    </nuxt-link>
+        </nuxt-link>
+    </Transition>
 </template>
 <script setup>
 import color from 'color-convert';
-
 const props = defineProps({
     date: {
         type: String,
@@ -61,7 +62,7 @@ const props = defineProps({
 const loading = ref()
 const coverBox = ref()
 function imgLoadSucceed() {
-    
+
     if (loading.value) {//元素被卸载了,但是还是有回调??
         loading.value.style.display = 'none'
     }

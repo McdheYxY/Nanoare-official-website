@@ -13,13 +13,14 @@ function getTitle(str) {
 	return s;
 }
 
-function getCover(baseUrl,str) {
+function getCover(baseUrl,owner,name,str) {
 	let s = str.match(regexp);
 	if (s === null) return undefined;
 	s = s[3]?.trim();
 	if (s === "") return undefined;
 	if (s === undefined) return undefined;
-	return `${baseUrl}/gh/mcdheyxy/Nanoare-official-website@files/files/${s}.gif`;
+	baseUrl = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
+	return `${baseUrl}gh/${owner}/${name}@files/files/${s}.gif`;
 }
 
 function getLink(str) {

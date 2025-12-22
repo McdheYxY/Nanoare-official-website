@@ -4,7 +4,7 @@
             <span>
                 <p ref="loading" class="loading">{{ props.name }}</p>
                 <div ref="loadImg" :class="{ deleteMode: props.mode === 2, editMode: props.mode === 1 }"
-                    v-imgloader="{ imgsrc: props.cover + '?' + Math.random(), failed: imgLoadFailed, succeed: imgLoadSucceed }">
+                    v-imgloader="{ imgsrc: props.cover , failed: imgLoadFailed, succeed: imgLoadSucceed }">
                     <img :src="imgsrc" alt="cover"/>
                 </div>
             </span>

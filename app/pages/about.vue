@@ -36,7 +36,7 @@ useHead({
 definePageMeta({
   pageTransition: {
     name: 'fade-in-up',
-    mode: 'default',
+    mode: 'out-in',
   },
 })
 

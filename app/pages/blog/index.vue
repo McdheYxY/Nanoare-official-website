@@ -7,7 +7,7 @@ const url = useRequestURL()
 definePageMeta({
     pageTransition: {
         name: 'fade-in-up',
-        mode: 'default',
+        mode: 'out-in',
     },
 })
 
@@ -49,20 +49,12 @@ useHead({
     ]
 })
 
-let fetchDate = {
-}
-
-if (route.query.end) {//下一页
-    fetchDate.end = route.query.end
-} else if (route.query.start) {//上一页
-    fetchDate.start = route.query.start
-}
+const fetchDate = ref({
+})
 
 /* 获取blog */
-const { data: blogs, error } = await useFetch('/api/blogs', {
-    cache: false, query: {
-        ...fetchDate
-    }
+const { data: blogs,clear, error } = await useFetch(() => `/api/blogs${fetchDate.value.key ? '?' + fetchDate.value.key + '=' + fetchDate.value.value : ''}`, {
+    cache: false
 });
 
 if (error.value) {
@@ -73,6 +65,14 @@ if (error.value) {
             message: '服务器内部错误',
         });
 }
+
+watch(blogs, () => {
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+    })
+})
 
 const blogsNodes = computed(() => {
     return blogs.value?.nodes || [];
@@ -131,19 +131,18 @@ function newBlog() {
 
             <blog-card v-for="blog in blogsNodes" :id="blog.number" :title="blogInfo.getTitle(blog.title)"
                 :abstract="blogInfo.getAbstract(blog.title)"
-                :cover="blogInfo.getCover($config.public.GHCDN, blog.title)" :date="blogInfo.getDate(blog.createdAt)"
-                :time="blogInfo.getTime(blog.createdAt)" :tags="blog.labels.nodes" />
+                :cover="blogInfo.getCover($config.public.GHCDN, $config.public.TL_OWNER, $config.public.TL_NAME, blog.title)"
+                :date="blogInfo.getDate(blog.createdAt)" :time="blogInfo.getTime(blog.createdAt)"
+                :tags="blog.labels.nodes" />
 
             <div class="previous-next-links">
                 <p>
-                    <a class="previous-design-link" :class="{ disabled: !pageInfo.hasPreviousPage }"
-                        :href="pageInfo.startCursor ? `/blog?start=${pageInfo.startCursor}` : '#'">
+                    <span class="previous-design-link" :class="{ disabled: !pageInfo.hasPreviousPage }" @click="fetchDate = { key: 'start', value: pageInfo.startCursor }">
                         上一页
-                    </a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="next-design-link"
-                        :class="{ disabled: !pageInfo.hasNextPage }"
-                        :href="pageInfo.endCursor ? `/blog?end=${pageInfo.endCursor}` : '#'">
+                    </span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="next-design-link"
+                        :class="{ disabled: !pageInfo.hasNextPage }" @click="fetchDate = { key: 'end', value: pageInfo.endCursor }">
                         下一页
-                    </a>
+                    </span>
                 </p>
             </div>
         </NuxtLayout>

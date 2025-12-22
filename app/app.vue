@@ -13,13 +13,25 @@
   transform: translateY(1rem) !important;
 }
 
-.fade-in-up-leave-active {
-  overflow: hidden;
-  transition:opacity .2s cubic-bezier(.4, 0, .2, 1), transform .2s cubic-bezier(.4, 0, .2, 1) !important;
-}
-
+.fade-in-up-leave-active,
 .fade-in-up-enter-active {
   overflow: hidden;
-  transition:opacity .2s .3s cubic-bezier(.4, 0, .2, 1), transform .2s cubic-bezier(.4, 0, .2, 1) !important;
+  transition: opacity .2s cubic-bezier(.4, 0, .2, 1), transform .2s cubic-bezier(.4, 0, .2, 1) !important;
+}
+
+/* .fade-in-enter-from {
+  opacity: 0 !important;
+  transform: scale(.7) !important;
+} */
+.fade-in-enter-from,
+.fade-in-leave-to {
+  opacity: 0 !important;
+  transform: translate(-50%, -50%) scale(.7) !important;
+}
+
+.fade-in-leave-active,
+.fade-in-enter-active {
+  overflow: hidden;
+  transition: opacity .2s cubic-bezier(.4, 0, .2, 1), transform .2s cubic-bezier(.4, 0, .2, 1) !important;
 }
 </style>

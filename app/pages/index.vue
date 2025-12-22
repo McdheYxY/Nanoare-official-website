@@ -31,6 +31,13 @@ useHead({
     ]
 })
 
+definePageMeta({
+    pageTransition: {
+        name: 'fade-in',
+        mode: 'out-in',//https://cn.vuejs.org/guide/built-ins/transition.html#transition-modes 避免二者同时存在时出现的布局问题
+    },
+})
+
 const bgVideo = ref()
 
 onMounted(async () => {
@@ -70,7 +77,6 @@ onMounted(async () => {
             </a>
         </div>
     </div>
-    <!-- <BgVideo bvid="BV1oG4y1r7PB"/> -->
 </template>
 <style scoped>
 #container {

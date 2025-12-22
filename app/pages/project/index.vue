@@ -25,7 +25,7 @@ useHead({
 definePageMeta({
     pageTransition: {
         name: 'fade-in-up',
-        mode: 'default',
+        mode: 'out-in',
     },
 })
 
@@ -102,7 +102,7 @@ function editProject() {
             <template v-for="project in projectsNodes">
                 <project-card v-if="projectInfo.isValid(project.title, project.body)"
                     @click="selectProject($event, project)" :mode="mode" :name="projectInfo.getTitle(project.title)"
-                    :cover="projectInfo.getCover($config.public.GHCDN,project.title)" :link="projectInfo.getLink(project.body)" />
+                    :cover="projectInfo.getCover($config.public.GHCDN,$config.public.TL_OWNER,$config.public.TL_NAME,project.title)" :link="projectInfo.getLink(project.body)" />
             </template>
             <Scene v-if="editSence" @clicklBackground="editSence = false">
                 <h1>编辑项目</h1>
