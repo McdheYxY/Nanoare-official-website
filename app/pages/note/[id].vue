@@ -1,7 +1,5 @@
 <script setup>
-import markdownit from 'markdown-it'
 const route = useRoute()
-const appConfig = useAppConfig()
 const router = useRouter()
 const access_token = useCookie('access_token')
 
@@ -29,7 +27,7 @@ if (error.value) {
 //         message: '不存在该编程日记'
 //     })
 // }
-const noteTitle = computed(()=>{
+const noteTitle = computed(() => {
     return note.value?.title || "Nanoare 的编程日记(notes)"
 })
 useHead({
@@ -51,23 +49,6 @@ useHead({
             name: 'twitter:card', content: 'summary'
         },
     ],
-    script: [
-        {
-            src: 'https://giscus.app/client.js',
-            'data-repo': "McdheYxY/Nanoare-official-website",
-            'data-repo-id': "R_kgDOQNIUNw",
-            'data-mapping': "number",
-            'data-term': route.params.id,
-            'data-reactions-enabled': "1",
-            'data-emit-metadata': "0",
-            'data-input-position': "top",
-            'data-theme': "preferred_color_scheme",
-            'data-lang': "zh-CN",
-            'data-loading': "lazy",
-            crossorigin: "anonymous",
-            async: true
-        }
-    ]
 })
 
 definePageMeta({
@@ -82,12 +63,22 @@ definePageMeta({
 //     console.log(data.value, 1);
 // })
 
-const markdown = computed(()=>{
+const markdown = computed(() => {
     return note.value?.body || "";
 })
 
+let md = useMarkdownIt({
+    // anchor_callback(token, info) {
+    //     anchors.value.push({
+    //         hash: `#${info.slug}`,
+    //         title: info.title,
+    //         level: parseInt(token.tag.charAt(1)),
+    //     });
+    // }
+})
+
+/* 响应式渲染为html */
 let mdhtml = computed(() => {
-    const md = new markdownit();
     return md.render(markdown.value);
 })
 
@@ -118,7 +109,7 @@ function newNote() {
                 </div>
             </article>
             <div class="comments">
-                <div class="giscus"></div>
+                <Comment :id="$route.params.id" :TL_OWNER="$config.public.TL_OWNER" :TL_NAME="$config.public.TL_NAME" />
             </div>
         </nuxt-layout>
     </div>

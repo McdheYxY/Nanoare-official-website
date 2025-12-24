@@ -24,7 +24,28 @@ let defaultConfig = {
 };
 
 export default function (options = {}) {
-    let config = {...defaultConfig,...options}
+	let config = { ...defaultConfig, ...options };
+
+	useHead({
+		link: [
+			/* highlightjs github风格 */
+			{
+				rel: "stylesheet",
+				href: "/css/github.css",
+			},
+			/* markdownItTextualUml */
+			{
+				rel: "stylesheet",
+				href: "https://testingcf.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css",
+			},
+		],
+		script: [
+			/* 复制功能 */
+			{
+				src: "/js/clipboard.js",
+			},
+		],
+	});
 	const md = new markdownit({
 		highlight: function (str, lang) {
 			if (lang && hljs.getLanguage(lang)) {
@@ -59,7 +80,7 @@ export default function (options = {}) {
 		.use(markdown_it_obsidianImgSize)
 		.use(markdownItCodeblock);
 
-	onMounted(async() => {
+	onMounted(async () => {
 		mermaid.initialize({ startOnLoad: false });
 		await mermaid.run();
 	});

@@ -5,20 +5,10 @@ const config = useRuntimeConfig();
 
 export default defineCachedEventHandler(
 	async (event) => {
-		const data: Array<object> = await event.$fetch("/api/blogs");
+		const data:any = await event.$fetch("/api/blogs");
 		const items: Array<any> = [];
-		/*
-		[
-				{
-					title: "Hello World",
-					link: "https://arenot.cn/blog/70",
-					description: "My first post",
-					pubDate: new Date(),
-				},
-			],
-		*/
-		if (data) {
-			data.forEach((blog: any) => {
+		if (data?.nodes) {
+			data.nodes.forEach((blog: any) => {
 				items.push({
 					title: blogInfo.getTitle(blog.title),
 					link: "https://arenot.cn/blog/" + blog.number,
@@ -43,11 +33,11 @@ export default defineCachedEventHandler(
 		//已经配置了缓存，这里省略下面的代码 ps：你请求时发现响应头设置不起作用，600秒被覆盖成了1小时
 		// setHeader(event, "Cache-Control", "max-age=600");
 		// setHeader(event, "Last-Modified", new Date().toUTCString());
-		setHeader(
-			event,
-			"Expires",
-			new Date(Date.now() + 10 * 60 * 1000).toUTCString()
-		);
+		// setHeader(
+		// 	event,
+		// 	"Expires",
+		// 	new Date(Date.now() + 10 * 60 * 1000).toUTCString()
+		// );
 		return rss;
 	},
 	{

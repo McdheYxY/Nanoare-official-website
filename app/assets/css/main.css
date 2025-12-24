@@ -1,5 +1,5 @@
 :root {
-    color-scheme: light dark;/* 解决滚动条深色模式下太亮 */
+	color-scheme: light dark; /* 解决滚动条深色模式下太亮 */
 	--article-text-color: #1a1d21;
 	--background-color: #fff;
 	--card-background-color: #fff;
@@ -10,6 +10,7 @@
 	--bg-stroke2: rgba(208, 208, 208, 0.2);
 	--article-table-bd: #d1d9e0;
 	--article-table-cell: #f6f8fa;
+	--bg-pre: #f6f8fa;
 }
 * {
 	box-sizing: border-box;
@@ -26,8 +27,7 @@ body {
 	background: linear-gradient(-90deg, var(--bg-stroke) 1px, transparent 1px) 0 0/100px
 			100px,
 		linear-gradient(var(--bg-stroke) 1px, transparent 1px) 0 0/100px 100px,
-		linear-gradient(-90deg, var(--bg-stroke2) 1px, transparent 1px) 0/25px
-			1px,
+		linear-gradient(-90deg, var(--bg-stroke2) 1px, transparent 1px) 0/25px 1px,
 		linear-gradient(var(--bg-stroke2) 1px, transparent 1px) 0 0/1px 25px,
 		var(--background-color);
 	background-position: -10px -6px;
@@ -58,7 +58,7 @@ body {
 	margin: 0 auto;
 	/* padding: 10px; */
 }
-.content{
+.content {
 	background-color: var(--background-color);
 	box-shadow: 0 0 10px 5px var(--background-color);
 }
@@ -81,8 +81,8 @@ a {
 .footer p {
 	text-align: center;
 }
-.markdown-alert{
-    margin-left: .3rem;
+.markdown-alert {
+	margin-left: 0.3rem;
 }
 @media (prefers-color-scheme: dark) {
 	:root {
@@ -96,12 +96,14 @@ a {
 		--bg-stroke2: rgba(66, 66, 66, 0.2);
 		--article-table-bd: #3d444d;
 		--article-table-cell: #151b23;
+		--bg-pre: #f6f8fa;
+		--bg-pre: #151b23;
 	}
 }
 
 .disabled {
-    pointer-events: none;
-    opacity: .6;
+	pointer-events: none;
+	opacity: 0.6;
 }
 
 article {
@@ -210,7 +212,7 @@ article pre code {
 }
 
 article pre {
-	background: #8e96aa24;
+	background: var(--bg-pre);
 	position: relative;
 }
 

@@ -188,6 +188,7 @@ function imgErrorReTry(event) {
     color: black;
     background-color: #fff2cc;
     font-size: 0.8rem;
+    white-space: nowrap;
 }
 
 @keyframes animLoading {

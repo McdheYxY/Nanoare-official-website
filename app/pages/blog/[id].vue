@@ -37,7 +37,7 @@ gitdcus.auth({
 
 /* 发送请求 */
 
-const { data: blog, error } = await useFetch(() => `/api/blogs/${route.params.id}`, { cache: false });
+const { data: blog,status, error } = await useFetch(() => `/api/blogs/${route.params.id}`, { cache: false });
 if (error.value) {
     if (import.meta.server)
         throw createError({
@@ -45,7 +45,6 @@ if (error.value) {
             message: 'blog not found',
         });
 }
-
 
 // //没有返回结果？？
 // if (blog.value === undefined) {
@@ -67,9 +66,10 @@ const markdown = computed(() => {
     return blog.value?.body || "";
 })
 
-const blogCreatedAt = computed(()=>{
+const blogCreatedAt = computed(() => {
     return blog.value?.createdAt ? blogInfo.getDate(blog.value.createdAt) : "1970-01-01";
 })
+
 useHead({
     title: blogTitle.value,
     meta: [
@@ -89,40 +89,6 @@ useHead({
             name: 'twitter:card', content: 'summary'
         },
     ],
-    link: [
-        /* highlightjs github风格 */
-        {
-            rel: 'stylesheet',
-            href: '/css/github.css'
-        },
-        /* markdownItTextualUml */
-        {
-            rel: 'stylesheet',
-            href: 'https://testingcf.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css'
-        }
-    ],
-    script: [
-        /* gitducs配置 */
-        {
-            src: 'https://giscus.app/client.js',
-            'data-repo': `${config.public.TL_OWNER}/${config.public.TL_NAME}`,
-            'data-repo-id': "R_kgDOQNIUNw",
-            'data-mapping': "number",
-            'data-term': route.params.id,
-            'data-reactions-enabled': "1",
-            'data-emit-metadata': "0",
-            'data-input-position': "top",
-            'data-theme': "preferred_color_scheme",
-            'data-lang': "zh-CN",
-            'data-loading': "lazy",
-            crossorigin: "anonymous",
-            async: true
-        },
-        /* 复制功能 */
-        {
-            src: '/js/clipboard.js'
-        }
-    ]
 })
 
 let md = useMarkdownIt({
@@ -205,7 +171,7 @@ onMounted(async () => {
                 </div>
             </article>
             <div class="comments">
-                <div class="giscus"></div>
+                <Comment :id="$route.params.id" :TL_OWNER="$config.public.TL_OWNER" :TL_NAME="$config.public.TL_NAME" />
             </div>
             <AnchorNav v-if="anchors.length" :anchors="anchors" />
         </nuxt-layout>
