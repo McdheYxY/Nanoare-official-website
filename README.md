@@ -15,7 +15,7 @@
 </p>
 
 ## 使用说明
-本项目部署在 Cloudflare Workers 上，所以下面的教程指针对需要部署在此平台上的人。如果你需要部署到其他平台请移步至[部署](#-部署)。
+本项目部署在 Cloudflare Workers 上，所以下面的教程指针对需要部署在此平台上的人。如果你需要部署到其他平台请移步至[部署](#部署)。
 
 前提条件：
 - 注册 Cloudflare 账号
@@ -24,7 +24,7 @@
 步骤：
 1. 点击 Star 左边的 Fork 按钮复制本仓库。
 2. 在已 Fork 的仓库下点击 Settings->Secrets and variables->Actions->New repository secret。
-3. 根据[配置文件](#-配置文件)的要求填写 Name 和 Secret。
+3. 根据[配置文件](#配置文件)的要求填写 Name 和 Secret。
 4. 因为要部署 Cloudflare Workers 所以，要额外添加两条 Cloudflare配置：`CLOUDFLARE_API_TOKEN`、`CLOUDFLARE_ACCOUNT_ID`。参考：[Set up CI/CD](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/#2-set-up-cicd)。
 5. 第一次 Fork 可能会出发 Github 工作流，报错是正常的。现在你需要点击 Actions->执行失败的build任务->重新执行。
 6. 稍等几分钟，直到有成功提示。
