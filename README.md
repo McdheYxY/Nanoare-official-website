@@ -14,7 +14,7 @@ This website uses GitHub Discussions as the backend for blog posts and comments,
 
 ## Usage Guide
 
-This project is deployed on Cloudflare Workers, so the tutorial below is specifically for users who wish to deploy to this platform. If you need to deploy to other platforms, please skip to the [Deployment](https://chatglm.cn/main/alltoolsdetail?redirect=/main/alltoolsdetail&lang=zh&cid=694d476bd4824778b0fe183e#deployment) section.
+This project is deployed on Cloudflare Workers, so the tutorial below is specifically for users who wish to deploy to this platform. If you need to deploy to other platforms, please skip to the [Deployment](#deployment) section.
 
 ### Prerequisites
 
@@ -25,12 +25,12 @@ This project is deployed on Cloudflare Workers, so the tutorial below is specifi
 
 1. Click the **Fork** button (located to the left of Star) to fork this repository.
 2. In your forked repository, navigate to **Settings** → **Secrets and variables** → **Actions** → **New repository secret**.
-3. Fill in the **Name** and **Secret** fields according to the requirements in the [Configuration Files](https://chatglm.cn/main/alltoolsdetail?redirect=/main/alltoolsdetail&lang=zh&cid=694d476bd4824778b0fe183e#configuration-files) section.
+3. Fill in the **Name** and **Secret** fields according to the requirements in the [Configuration Files](#configuration-files) section.
 4. Since you’re deploying to Cloudflare Workers, you’ll need to add two additional Cloudflare configuration entries: `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. For details, refer to [Set up CI/CD](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/#2-set-up-cicd) .
 5. When you first fork the repository, it may trigger a GitHub workflow—errors at this stage are normal. Now you need to go to **Actions** → click on the failed build task → **Re-run jobs**.
 6. Wait a few minutes until you see a success message.
 7. If everything goes smoothly, you should see your deployed project in Cloudflare Workers.
-8. Open the settings page of your deployed project and add at least a `TL_TOKEN` secret under **Variables and Secrets** (if you encounter display-related bugs, also add all the variables mentioned in [Configuration Files](https://chatglm.cn/main/alltoolsdetail?redirect=/main/alltoolsdetail&lang=zh&cid=694d476bd4824778b0fe183e#configuration-files); be sure to select **Secret** as the type).
+8. Open the settings page of your deployed project and add at least a `TL_TOKEN` secret under **Variables and Secrets** (if you encounter display-related bugs, also add all the variables mentioned in [Configuration Files](#configuration-files); be sure to select **Secret** as the type).
 
 ## Technologies Used
 
