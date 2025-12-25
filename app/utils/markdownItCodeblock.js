@@ -5,7 +5,7 @@ function getCodeLangEle(str = "") {
 }
 
 function isMermaid(str = "") {
-	const reg = / class="mermaid/;
+	const reg = /class="mermaid/;
 	return reg.test(str);
 }
 
@@ -14,6 +14,8 @@ function fenceRenderPlus(oldRender) {
 	// 闭包函数，oldRender在此范围使用
 	return function innerFun(tokens, idx, options, env, slf) {
 		const oldResult = oldRender.apply(this, arguments);
+		console.log(oldResult);
+		
 		if(isMermaid(oldResult)){
 			return oldResult;
 		}
@@ -29,7 +31,7 @@ function fenceRenderPlus(oldRender) {
 	};
 }
 
-export default function markdown_it_codeblock(md) {
+export default function markdownItCodeblock(md) {
 	const codeBlockRender = md.renderer.rules.code_block;
 	const fenceRender = md.renderer.rules.fence;
 	md.renderer.rules.code_block = fenceRenderPlus(codeBlockRender);

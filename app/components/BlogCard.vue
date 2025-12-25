@@ -181,7 +181,8 @@ function imgErrorReTry(event) {
 }
 
 .blog-card-tags span {
-    border-radius: 0.3rem;
+    /* border-radius: 0.3rem; */
+    border-radius: 1.2rem;
     margin-inline-start: 0.7rem;
     padding: 0.2rem 0.6rem;
     text-align: center;

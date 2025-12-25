@@ -1,49 +1,55 @@
-# ARENOT | Nanoare official website
-网站使用了Github讨论作为博客文章和评论，使用file分支储存二进制文件，使用 Cloudflare Workers 运行，使用 Cloudflare KV 缓存请求。
+# ARENOT | Nanoare Official Website
 
-演示网站：[Nanoare official website](https://arenot.cn/)
-<p align="center">
-  <a href="https://arenot.cn/" target=_blank><img
-    src="https://cdn.jsdelivr.net/gh/mcdheyxy/Nanoare-official-website@files/files/Screenshot_20251224_092728_com.android.chrome.jpg" height="220"
-  /></a>
-  <a href="https://arenot.cn/" target=_blank><img
-    src="https://cdn.jsdelivr.net/gh/mcdheyxy/Nanoare-official-website@files/files/Screenshot_20251224_092717_com.android.chrome.jpg" height="220"
-  /></a>
-  <a href="https://arenot.cn/" target=_blank><img
-    src="https://cdn.jsdelivr.net/gh/mcdheyxy/Nanoare-official-website@files/files/Screenshot_20251224_092724_com.android.chrome.jpg" height="220"
-  /></a>
-</p>
+This website uses GitHub Discussions as the backend for blog posts and comments, utilizes the `files` branch to store binary assets, and runs on Cloudflare Workers with Cloudflare KV for request caching.
 
-## 使用说明
-本项目部署在 Cloudflare Workers 上，所以下面的教程指针对需要部署在此平台上的人。如果您需要部署到其他平台请移步至[部署](#部署)。
+**Demo Site:** [Nanoare Official Website](https://arenot.cn/)
 
-前提条件：
-- 注册 Cloudflare 账号
-- 注册 Github 账号
+<p align="center"> <a href="https://arenot.cn/" target=_blank><img src="https://cdn.jsdelivr.net/gh/mcdheyxy/Nanoare-official-website@files/files/Screenshot_20251224_092728_com.android.chrome.jpg" height="220" /></a> <a href="https://arenot.cn/" target=_blank><img src="https://cdn.jsdelivr.net/gh/mcdheyxy/Nanoare-official-website@files/files/Screenshot_20251224_092717_com.android.chrome.jpg" height="220" /></a> <a href="https://arenot.cn/" target=_blank><img src="https://cdn.jsdelivr.net/gh/mcdheyxy/Nanoare-official-website@files/files/Screenshot_20251224_092724_com.android.chrome.jpg" height="220" /></a> </p>
 
-步骤：
-1. 点击 Star 左边的 Fork 按钮复制本仓库。
-2. 在已 Fork 的仓库下点击 Settings->Secrets and variables->Actions->New repository secret。
-3. 根据[配置文件](#配置文件)的要求填写 Name 和 Secret。
-4. 因为要部署 Cloudflare Workers 所以，要额外添加两条 Cloudflare 配置：`CLOUDFLARE_API_TOKEN`、`CLOUDFLARE_ACCOUNT_ID`。参考：[Set up CI/CD](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/#2-set-up-cicd)。
-5. 第一次 Fork 可能会触发 Github 工作流，报错是正常的。现在您需要点击 Actions->执行失败的build任务->重新执行。
-6. 稍等几分钟，直到有成功提示。
-7. 如果一切顺利您会在 Cloudflare Workers 也看见您已部署的项目。
-8. 点开已部署项目的设置页，在变量与机密中至少添加一个`TL_TOKEN`机密配置。（如果有显示不一致的bug就把[配置文件](#配置文件)中提到的都填上去，注意类型选机密）
+<div align="center">
 
-## 引用技术
+**English** | **[中文](README-CN.md)**
+
+</div>
+
+## Usage Guide
+
+This project is deployed on Cloudflare Workers, so the tutorial below is specifically for users who wish to deploy to this platform. If you need to deploy to other platforms, please skip to the [Deployment](https://chatglm.cn/main/alltoolsdetail?redirect=/main/alltoolsdetail&lang=zh&cid=694d476bd4824778b0fe183e#deployment) section.
+
+### Prerequisites
+
+- Register a Cloudflare account
+- Register a GitHub account
+
+### Steps
+
+1. Click the **Fork** button (located to the left of Star) to fork this repository.
+2. In your forked repository, navigate to **Settings** → **Secrets and variables** → **Actions** → **New repository secret**.
+3. Fill in the **Name** and **Secret** fields according to the requirements in the [Configuration Files](https://chatglm.cn/main/alltoolsdetail?redirect=/main/alltoolsdetail&lang=zh&cid=694d476bd4824778b0fe183e#configuration-files) section.
+4. Since you’re deploying to Cloudflare Workers, you’ll need to add two additional Cloudflare configuration entries: `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. For details, refer to [Set up CI/CD](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/#2-set-up-cicd) .
+5. When you first fork the repository, it may trigger a GitHub workflow—errors at this stage are normal. Now you need to go to **Actions** → click on the failed build task → **Re-run jobs**.
+6. Wait a few minutes until you see a success message.
+7. If everything goes smoothly, you should see your deployed project in Cloudflare Workers.
+8. Open the settings page of your deployed project and add at least a `TL_TOKEN` secret under **Variables and Secrets** (if you encounter display-related bugs, also add all the variables mentioned in [Configuration Files](https://chatglm.cn/main/alltoolsdetail?redirect=/main/alltoolsdetail&lang=zh&cid=694d476bd4824778b0fe183e#configuration-files); be sure to select **Secret** as the type).
+
+## Technologies Used
+
 - [NuxtJS](https://nuxt.com/)
 - [Vue.js](https://vuejs.org/)
 - [markdown-it](https://markdown-it.github.io/)
 - [highlight.js](https://highlightjs.org/)
 
-## 开发说明
-1. 克隆我们的仓库到本地
-```bash
+## Development Guide
+
+### 1. Clone the repository locally
+
+```
 git clone https://github.com/McdheYxY/Nanoare-official-website.git
 ```
-2. 安装依赖
-```bash
+
+### 2. Install dependencies
+
+```
 # npm
 npm install
 
@@ -57,48 +63,62 @@ yarn install
 bun install
 ```
 
-### 开发环境
-3. 配置环境变量
-在项目根目录下有一个`.env.example`文件，这是一个模板文件，程序不会使用它。您在修改键值后将后缀`.example`去掉并保存，程序会自动识别`.env`的文件。
-4. 运行&调试
-```bash
+### Development Environment
+
+#### 3. Configure environment variables
+
+In the project root directory, there is a `.env.example` file. This is a template file and will not be used by the application. After modifying the key-value pairs, remove the `.example` suffix and save it. The application will automatically recognize the `.env` file.
+
+#### 4. Run & Debug
+
+```
 npm run dev
 ```
 
-5. 构建
-```bash
+#### 5. Build
+
+```
 npm run build
 ```
-### 生产环境
-3. 配置环境变量
-在项目根目录下有一个`.env.example`文件，这是一个模板文件，程序不会使用它。您在修改键值后将后缀`.example`替换为`.production`并保存，程序会自动识别`.env.production`的文件。
-4. 运行&调试
-```bash
+
+### Production Environment
+
+#### 3. Configure environment variables
+
+In the project root directory, there is a `.env.example` file. This is a template file and will not be used by the application. After modifying the key-value pairs, replace the `.example` suffix with `.production` and save it. The application will automatically recognize the `.env.production` file.
+
+#### 4. Run & Debug
+
+```
 npm run dev
 ```
 
-5. 构建
-```bash
+#### 5. Build
+
+```
 npm run build:prod
 ```
 
-## 配置文件
-此项目有两个配置文件：`nuxt.config.ts`、`.env`。
+## Configuration Files
 
-优先级：`.env`>`nuxt.config.ts`。
->[!WARNING]
->请不要在`nuxt.config.ts`中包含密钥等私密信息！！！
+This project has two configuration files: `nuxt.config.ts` and `.env`.
 
-您可以在[.env.example](https://github.com/McdheYxY/Nanoare-official-website/blob/main/.env.example)和[nuxt.config.ts](https://github.com/McdheYxY/Nanoare-official-website/blob/main/nuxt.config.ts)的`runtimeConfig.public`中找到以下配置。
+**Priority:** `.env` > `nuxt.config.ts`
 
-| 名称                   | 描述                                                           |
-| ---------------------- | -------------------------------------------------------------- |
-| NUXT_PUBLIC_LINK       | 您的网站首页域名                                               |
-| NUXT_PUBLIC_GHCDN      | 您选择加速您仓库二进制文件的CDN                                |
-| NUXT_PUBLIC_CACHE_TIME | 请求被缓存的时间                                               |
-| NUXT_PUBLIC_TL_OWNER   | 仓库拥有者名称                                                 |
-| NUXT_PUBLIC_TL_NAME    | 仓库名称                                                       |
-| TL_TOKEN               | [生成令牌](https://github.com/settings/personal-access-tokens) |
+> [!WARNING]  
+> **Do NOT include sensitive information such as secret keys in `nuxt.config.ts`!!!**
 
-## 部署
-此项目基于 NuxtJS。Nuxt 社区十分活跃，在部署第三方方面几乎覆盖了大部分平台。如果您对如何部署在其他平台上感兴趣，请阅读他们的[官方文档](https://nuxt.com/deploy)。
+You can find the following configuration options in [`.env.example`](https://github.com/McdheYxY/Nanoare-official-website/blob/main/.env.example) and in `runtimeConfig.public` of [`nuxt.config.ts`](https://github.com/McdheYxY/Nanoare-official-website/blob/main/nuxt.config.ts) :
+
+| Name                     | Description                                                          |
+| ------------------------ | -------------------------------------------------------------------- |
+| `NUXT_PUBLIC_LINK`       | Your website’s homepage domain                                       |
+| `NUXT_PUBLIC_GHCDN`      | The CDN you choose to accelerate your repository’s binary files      |
+| `NUXT_PUBLIC_CACHE_TIME` | Cache duration for requests                                          |
+| `NUXT_PUBLIC_TL_OWNER`   | Repository owner username                                            |
+| `NUXT_PUBLIC_TL_NAME`    | Repository name                                                      |
+| `TL_TOKEN`               | [Generate Token](https://github.com/settings/personal-access-tokens) |
+
+## Deployment
+
+This project is based on NuxtJS. The Nuxt community is very active, and third-party deployments cover most platforms. If you’re interested in deploying to other platforms, please consult their [official documentation](https://nuxt.com/deploy) .

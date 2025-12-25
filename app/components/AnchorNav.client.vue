@@ -214,6 +214,7 @@ onUnmounted(() => {
     /* scrollbar-width: none; */
     /* Firefox */
     scrollbar-width: thin;
+    overflow: hidden;
 }
 
 #dictNav ul {

@@ -18,7 +18,7 @@ const props = defineProps({
     id: String
 })
 
-if (props.id === undefined) {
+if (props.id === undefined || props.id.trim()=='') {
     editMode.value = false
 } else {
     if (!Number.isInteger(parseInt(props.id))) {
@@ -110,14 +110,8 @@ function inputevent(md) {
 }
 
 
-
-const data = ref({})
-try {
-    if (editMode.value) {
-        const { data: body } = await useFetch(() => `/api/blogs/${route.params.id}`);
-        data.value = body.value;
-    }
-} catch (error) {
+const { data, error } = await useFetch(() => `/api/blogs/${route.params.id}`);
+if (error.value && import.meta.server) {
     throw createError({
         statusCode: 500,
         message: '服务器内部错误'
