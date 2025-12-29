@@ -138,10 +138,10 @@ function newBlog() {
             <div class="previous-next-links">
                 <p>
                     <span class="previous-design-link" :class="{ disabled: !pageInfo.hasPreviousPage }" @click="fetchDate = { key: 'start', value: pageInfo.startCursor }">
-                        上一页
+                        « Prev
                     </span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="next-design-link"
                         :class="{ disabled: !pageInfo.hasNextPage }" @click="fetchDate = { key: 'end', value: pageInfo.endCursor }">
-                        下一页
+                        Next »
                     </span>
                 </p>
             </div>
