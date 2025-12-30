@@ -5,14 +5,15 @@ const config = useRuntimeConfig();
 
 export default defineCachedEventHandler(
 	async (event) => {
-		const data:any = await event.$fetch("/api/blogs");
+		const data: any = await event.$fetch("/api/blogs");
 		const items: Array<any> = [];
 		if (data?.nodes) {
 			data.nodes.forEach((blog: any) => {
 				items.push({
 					title: blogInfo.getTitle(blog.title),
 					link: "https://arenot.cn/blog/" + blog.number,
-					description: blogInfo.getAbstract(blog.title),
+					description:
+						blogInfo.getAbstract(blog.title) || "作者很懒，什么也没写",
 					pubDate: new Date(blog.createdAt),
 				});
 			});
