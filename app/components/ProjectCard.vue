@@ -4,8 +4,11 @@
             <span>
                 <p ref="loading" class="loading">{{ props.name }}</p>
                 <div ref="loadImg" :class="{ deleteMode: props.mode === 2, editMode: props.mode === 1 }"
-                    v-imgloader="{ imgsrc: props.cover , failed: imgLoadFailed, succeed: imgLoadSucceed }">
-                    <img :src="imgsrc" alt="cover"/>
+                    v-imgloader="{ imgsrc: props.cover, failed: imgLoadFailed, succeed: imgLoadSucceed }">
+                    <img :src="imgsrc" alt="cover" />
+                </div>
+                <div class="project-card-hover">
+                    <p>{{ props.name }}</p>
                 </div>
             </span>
         </a>
@@ -96,6 +99,21 @@ function imgLoadSucceed() {
     vertical-align: bottom;
     width: 100%;
     object-fit: cover;
+}
+
+.project-card-hover {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity .15s ease-in;
+}
+
+.project-card-hover:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 @media (min-width: 360px) {
