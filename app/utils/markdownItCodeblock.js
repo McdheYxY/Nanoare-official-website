@@ -1,7 +1,8 @@
 function getCodeLangEle(str = "") {
-	const reg = /class="language-([a-z]+)/;
-	reg.test(str);
-	return (RegExp.$1 && `<span class="lang-text">${RegExp.$1}</span>`) || "";
+	const reg = / class="language-([a-z]+)/;
+	const result = reg.exec(str);
+	if (result) return `<span class="lang-text">${result[1]}</span>`;
+	return "";
 }
 
 function isMermaid(str = "") {
@@ -14,7 +15,7 @@ function fenceRenderPlus(oldRender) {
 	// 闭包函数，oldRender在此范围使用
 	return function innerFun(tokens, idx, options, env, slf) {
 		const oldResult = oldRender.apply(this, arguments);
-		if(isMermaid(oldResult)){
+		if (isMermaid(oldResult)) {
 			return oldResult;
 		}
 		const insetEle = [
