@@ -122,3 +122,22 @@ You can find the following configuration options in [`.env.example`](https://gi
 ## Deployment
 
 This project is based on NuxtJS. The Nuxt community is very active, and third-party deployments cover most platforms. If you’re interested in deploying to other platforms, please consult their [official documentation](https://nuxt.com/deploy) .
+
+## Publishing Blogs
+
+We have added support for managing blog posts on the website, though the feature is not yet fully complete. Here is a method to manually create blog posts:
+
+1. Open **Discussions**. (If it is not visible, please enable the **Discussions** option under **Settings** -> **Features**).
+2. Create a new category named `blog` in **Categories**.
+3. Start a new discussion within the `blog` category.
+4. You can write whatever you like in the **Body** section.
+5. For the **Title**, please follow the format `[Title](Summary "202512291849047")` (Note: the `"202512291849047"` part must be a `.png` image file named with a timestamp, which has been uploaded to the `files` directory in the `files` branch). If you do not require a summary or cover image, you may write the title freely.
+6. Click **Start discussion**, and the post will appear in the blog section (if you have configured a long `NUXT_PUBLIC_CACHE_TIME` duration, you may need to wait a moment for it to appear).
+
+## Publishing Programming Journals (notes)
+
+To be completed…
+
+## Publishing Projects (projects)
+
+To be completed…

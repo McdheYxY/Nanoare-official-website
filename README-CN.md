@@ -108,3 +108,18 @@ npm run build:prod
 
 ## 部署
 此项目基于 NuxtJS。Nuxt 社区十分活跃，在部署第三方方面几乎覆盖了大部分平台。如果您对如何部署在其他平台上感兴趣，请阅读他们的[官方文档](https://nuxt.com/deploy)。
+
+## 发布网络日志(blogs)
+我们支持了在网站中管理博客文章，但是现在尚不完善。这里提供了手动创建博客文章的方法：
+1. 打开 Discussions。(如果没有请在 Settings->Features 中勾选Discussions选项)
+2. 在 Categories 新增一个`blog`分类。
+3. 在`blog`分类新建一个讨论。
+4. body 部分可以随意写
+5. title 部分请按照`[标题](摘要 "202512291849047")`格式（`"202512291849047"`部分必须是上传至files分支files目录下的以时间戳命名的`.png`为后缀的图片文件），如果您不需要摘要和封面部分可以随意写 title。
+6. 点击 Start discussion 就会出现在网络日志中（如果您配置了较长的`NUXT_PUBLIC_CACHE_TIME`时长可能需要等待一会儿）。
+
+## 发布编程日记(notes)
+待完善..
+
+## 发布作品合集(projects)
+待完善...
