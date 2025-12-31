@@ -18,7 +18,7 @@ const props = defineProps({
     id: String
 })
 
-if (props.id === undefined || props.id.trim()=='') {
+if (props.id === undefined || props.id.trim() == '') {
     editMode.value = false
 } else {
     if (!Number.isInteger(parseInt(props.id))) {
@@ -81,6 +81,7 @@ function saveBlog() {
                 router.push('/blog')
             }).catch(error => {
                 newDisabled.value = false
+                editor.value.enable()
                 alert("修改blog失败：" + error)
                 console.log(error);
             })
@@ -97,6 +98,7 @@ function saveBlog() {
                 router.push('/blog')
             }).catch(error => {
                 newDisabled.value = false
+                editor.value.enable()
                 alert("创建blog失败：" + error)
                 console.log(error);
             })
