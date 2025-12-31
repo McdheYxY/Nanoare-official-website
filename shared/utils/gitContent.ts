@@ -75,7 +75,7 @@ export default {
 			.then((res) => {
 				if (Object.prototype.hasOwnProperty.call(this.fileTypes, file.type)) {
 					baseUrl = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
-					return `${baseUrl}/gh/mcdheyxy/Nanoare-official-website@files/files/${time}.${
+					return `${baseUrl}/gh/${owner}/${name}@files/files/${time}.${
 						this.fileTypes[file.type]
 					}`;
 				}else{
