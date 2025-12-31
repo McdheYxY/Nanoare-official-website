@@ -56,6 +56,10 @@ function initDictNav() {
     }
 };
 let ctx = {}
+function keydownTab(e) {
+    if (e.key.indexOf('Tab') != -1)
+        ctx.idn4(e);
+}
 onMounted(async () => {
     await nextTick()
     ctx = {
@@ -129,6 +133,7 @@ onMounted(async () => {
     initDictNav.call(ctx);
     document.body.classList.add('scrollSmooth')
     document.documentElement.classList.add('scrollSmooth')
+    window.addEventListener("keydown", keydownTab)
 })
 onUnmounted(() => {
     document.removeEventListener("orientationchange", ctx.ipt1)
@@ -143,6 +148,8 @@ onUnmounted(() => {
     // TODO 这里不该出现下面两行代码，需要做功能分离
     document.body.classList.remove('scrollSmooth')
     document.documentElement.classList.remove('scrollSmooth')
+    window.removeEventListener("keydown", keydownTab)
+
 })
 
 
@@ -153,7 +160,7 @@ onUnmounted(() => {
         <ul id="dictNavList">
             <li v-for="anchor in props.anchors">
                 <nuxt-link :to="{ hash: anchor.hash }" :style="{ textIndent: `${anchor.level - 2}rem` }">{{ anchor.title
-                    }}</nuxt-link>
+                }}</nuxt-link>
             </li>
         </ul>
         <a id="dictNavBtn" href="#"></a>

@@ -14,8 +14,6 @@ function fenceRenderPlus(oldRender) {
 	// 闭包函数，oldRender在此范围使用
 	return function innerFun(tokens, idx, options, env, slf) {
 		const oldResult = oldRender.apply(this, arguments);
-		console.log(oldResult);
-		
 		if(isMermaid(oldResult)){
 			return oldResult;
 		}
