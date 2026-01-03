@@ -5,154 +5,181 @@ const props = defineProps({
         default: []
     }
 })
-/* 设置元素距离文档的高度 */
-var setEleTop = function (ele) {
-    //https://segmentfault.com/a/1190000008065472
-    var bodyScrollTop =
-        document.documentElement.scrollTop || document.body.scrollTop;
-    ele.style.top = Math.min(Math.ceil(window.innerHeight - ele.offsetHeight - 80) +
-        bodyScrollTop, ctx.comment.offsetTop) +
-        "px";
-};
 
-
-/* 初始化nav的位置、提交监听实际 */
-var initPosition = function () {
-    setEleTop(this.nav);
-    document.addEventListener(
-        "orientationchange", //用户旋转屏幕
-        this.ipt1,
-        false
-    );
-    document.addEventListener(
-        "scroll",
-        this.ipt1,
-        false
-    );
-};
-
-
-
-/* 动态设置dictNavList高度，添加dictNavBtn点击事件 */
-function initDictNav() {
-    this.dictNav.addEventListener("transitionrun", this.idn1);
-    this.dictNav.addEventListener("transitionend", this.idn2);
-    this.lists.addEventListener("transitionend", this.idn3);
-    if (!!this.dictNav) {
-        initPosition.call(this);
-        if (!!this.dictNavBtn) {
-            this.dictNavBtn.addEventListener(
+const AnchorNavApp = {
+    nav: null,
+    dictNav: null,
+    dictNavBtn: null,
+    lists: null,
+    comment: null,
+    getNavEl() {
+        if (!this.nav) this.nav = document.getElementById("dictNav");
+        return this.nav;
+    },
+    getDictNavEl() {
+        if (!this.dictNav) this.dictNav = document.getElementById("dictNav");
+        return this.dictNav;
+    },
+    getDictNavBtnEl() {
+        if (!this.dictNavBtn) this.dictNavBtn = document.getElementById("dictNavBtn");
+        return this.dictNavBtn;
+    },
+    getListsEl() {
+        if (!this.lists) this.lists = document.getElementById("dictNavList");
+        return this.lists;
+    },
+    getCommentEl() {
+        if (!this.comment) this.comment = document.querySelector(".comments");
+        return this.comment;
+    },
+    /* 动态设置dictNavList高度，添加dictNavBtn点击事件 */
+    initDictNav() {
+        //初始化元素
+        this.getNavEl()
+        this.getDictNavEl()
+        this.getDictNavBtnEl()
+        this.getListsEl()
+        this.getCommentEl()
+        if (!!this.dictNav) {
+            this.initPosition()
+            if (!!this.dictNavBtn) {
+                this.dictNavBtn.addEventListener(
+                    "click",
+                    this.idn4,
+                    false
+                );
+            }
+            /* list a标签事件委托*/
+            this.lists.addEventListener(
                 "click",
-                this.idn4,
+                this.idn5,
                 false
             );
         }
-        /* list a标签事件委托*/
-        this.lists.addEventListener(
-            "click",
-            this.idn5,
+        //注册事件
+        this.dictNav.addEventListener("transitionrun", this.idn1);
+        this.dictNav.addEventListener("transitionend", this.idn2);
+        this.lists.addEventListener("transitionend", this.idn3);
+        window.addEventListener("keydown", this.keydownTab)
+    },
+    uninstall() {
+        document.removeEventListener("orientationchange", this.ipt1)
+        document.removeEventListener("scroll", this.ipt1)
+
+        this.dictNav.removeEventListener("transitionrun", this.idn1)
+        this.dictNav.removeEventListener("transitionend", this.idn2)
+        this.lists.removeEventListener("transitionend", this.idn3)
+
+        this.dictNav.removeEventListener("click", this.idn4)
+        this.lists.removeEventListener("click", this.idn5)
+        window.removeEventListener("keydown", this.keydownTab)
+    },
+    /* 初始化nav的位置、提交监听实际 */
+    initPosition() {
+        this.setEleTop(this.nav);
+        document.addEventListener(
+            "orientationchange", //用户旋转屏幕
+            this.ipt1,
             false
         );
-    }
-};
-let ctx = {}
-function keydownTab(e) {
-    if (e.key.indexOf('Tab') != -1)
-        ctx.idn4(e);
-}
-onMounted(async () => {
-    await nextTick()
-    ctx = {
-        nav: document.getElementById("dictNav"),
-        dictNav: document.getElementById("dictNav"),
-        dictNavBtn: document.getElementById("dictNavBtn"),
-        lists: document.getElementById("dictNavList"),
-        comment: document.querySelector(".comments"),
-        ipt1() {//initPosition方法下的orientationchange与scroll回调
-            setEleTop(ctx.nav);
-        },
-        idn1() {//initDictNav方法下的transitionrun
-            ctx.dictNavBtn.style.backgroundPosition = "-48px 0";
-        },
-        idn2() {//initDictNav方法下的transitionend
-            ctx.dictNavBtn.style.backgroundPosition = "0 0";
-        },
-        idn3() {//initDictNav方法下的transitionend2
-            if (!ctx.dictNavBtn.className) {
-                ctx.lists.style.display = "none";
-            }
-        },
-        idn4(e) {//initDictNav方法下的click
-            var num = props.anchors.length,
-                maxNum = 8,
-                showHeight,
-                borderHeight = 1;
-            if (
-                ctx.lists.style.display === "none" ||
-                window
-                    .getComputedStyle(ctx.lists, null)
-                    .getPropertyValue("display") == "none"
-            ) {
-                //js添加的是内联样式，css文件需要调用后者方法
-                ctx.dictNavBtn.className += "selected";
-                ctx.lists.style.display = "block";
-                ctx.lists.style.opacity = 1;
-            } else if (ctx.lists.style.display === "block") {
-                ctx.dictNavBtn.className = "";
-                ctx.lists.style.height = "0px";
-                ctx.lists.style.opacity = 0;
-            }
-            if (ctx.lists.style.display == "block") {
-                var liChildHight =
-                    ctx.lists.querySelector("li").clientHeight + borderHeight;
-                showHeight =
-                    num >= maxNum ? liChildHight * maxNum : liChildHight * num;
-            }
-            if (num > maxNum) {
-                ctx.lists.style.overflowY = "scroll";
-            }
-            var listheightStyle = window
-                .getComputedStyle(ctx.lists, null)
-                .getPropertyValue("height");
-            if (listheightStyle == "0px") {
-                ctx.lists.style.height = showHeight + "px";
-            }
-            e.preventDefault();
+        document.addEventListener(
+            "scroll",
+            this.ipt1,
+            false
+        );
+    },
+    /* 设置元素距离文档的高度 */
+    setEleTop(ele) {
+        //https://segmentfault.com/a/1190000008065472
+        var bodyScrollTop =
+            document.documentElement.scrollTop || document.body.scrollTop;
+        ele.style.top = Math.min(Math.ceil(window.innerHeight - ele.offsetHeight - 80) +
+            bodyScrollTop, this.comment.offsetTop) +
+            "px";
+    },
+    /* 按下Tab打开锚点导航 */
+    keydownTab(e) {
+        if (e.key.indexOf('Tab') != -1)
+            AnchorNavApp.idn4(e);
+    },
+    ipt1() {//initPosition方法下的orientationchange与scroll回调
+        AnchorNavApp.setEleTop(AnchorNavApp.nav);
+    },
+    idn1() {//initDictNav方法下的transitionrun
+        AnchorNavApp.dictNavBtn.style.backgroundPosition = "-48px 0";
+    },
+    idn2() {//initDictNav方法下的transitionend
+        AnchorNavApp.dictNavBtn.style.backgroundPosition = "0 0";
+    },
+    idn3() {//initDictNav方法下的transitionend2
+        if (!AnchorNavApp.dictNavBtn.className) {
+            AnchorNavApp.lists.style.display = "none";
+        }
+    },
+    idn4(e) {//initDictNav方法下的click
+        var num = props.anchors.length,
+            maxNum = 8,
+            showHeight,
+            borderHeight = 1;
+        if (
+            AnchorNavApp.lists.style.display === "none" ||
+            window
+                .getComputedStyle(AnchorNavApp.lists, null)
+                .getPropertyValue("display") == "none"
+        ) {
+            //js添加的是内联样式，css文件需要调用后者方法
+            AnchorNavApp.dictNavBtn.className += "selected";
+            AnchorNavApp.lists.style.display = "block";
+            AnchorNavApp.lists.style.opacity = 1;
+        } else if (AnchorNavApp.lists.style.display === "block") {
+            AnchorNavApp.dictNavBtn.className = "";
+            AnchorNavApp.lists.style.height = "0px";
+            AnchorNavApp.lists.style.opacity = 0;
+        }
+        if (AnchorNavApp.lists.style.display == "block") {
+            var liChildHight =
+                AnchorNavApp.lists.querySelector("li").clientHeight + borderHeight;
+            showHeight =
+                num >= maxNum ? liChildHight * maxNum : liChildHight * num;
+        }
+        if (num > maxNum) {
+            AnchorNavApp.lists.style.overflowY = "scroll";
+        }
+        var listheightStyle = window
+            .getComputedStyle(AnchorNavApp.lists, null)
+            .getPropertyValue("height");
+        if (listheightStyle == "0px") {
+            AnchorNavApp.lists.style.height = showHeight + "px";
+        }
+        e.preventDefault();
+        e.stopPropagation();
+    },
+    idn5(e) {
+        if (e.target.nodeName.toLowerCase() == "a") {
+            // var navDictId = e.target.href.split("#")[1];
+            AnchorNavApp.lists.style.height = "0px";
+            AnchorNavApp.lists.style.opacity = 0;
+            AnchorNavApp.dictNavBtn.className = "";
             e.stopPropagation();
-        },
-        idn5(e) {
-            if (e.target.nodeName.toLowerCase() == "a") {
-                // var navDictId = e.target.href.split("#")[1];
-                ctx.lists.style.height = "0px";
-                ctx.lists.style.opacity = 0;
-                ctx.dictNavBtn.className = "";
-                e.stopPropagation();
-            }
         }
     }
-    initDictNav.call(ctx);
-    document.body.classList.add('scrollSmooth')
-    document.documentElement.classList.add('scrollSmooth')
-    window.addEventListener("keydown", keydownTab)
+}
+
+
+onMounted(async () => {
+    await nextTick();
+    //初始化锚点导航
+    AnchorNavApp.initDictNav();
+    document.body.classList.add('scrollSmooth');
+    document.documentElement.classList.add('scrollSmooth');
 })
 onUnmounted(() => {
-    document.removeEventListener("orientationchange", ctx.ipt1)
-    document.removeEventListener("scroll", ctx.ipt1)
-
-    ctx.dictNav.removeEventListener("transitionrun", ctx.idn1)
-    ctx.dictNav.removeEventListener("transitionend", ctx.idn2)
-    ctx.lists.removeEventListener("transitionend", ctx.idn3)
-
-    ctx.dictNav.removeEventListener("click", ctx.idn4)
-    ctx.lists.removeEventListener("click", ctx.idn5)
+    //卸载锚点导航
+    AnchorNavApp.uninstall();
     // TODO 这里不该出现下面两行代码，需要做功能分离
-    document.body.classList.remove('scrollSmooth')
-    document.documentElement.classList.remove('scrollSmooth')
-    window.removeEventListener("keydown", keydownTab)
-
+    document.body.classList.remove('scrollSmooth');
+    document.documentElement.classList.remove('scrollSmooth');
 })
-
-
 </script>
 
 <template>
@@ -160,7 +187,7 @@ onUnmounted(() => {
         <ul id="dictNavList">
             <li v-for="anchor in props.anchors">
                 <nuxt-link :to="{ hash: anchor.hash }" :style="{ textIndent: `${anchor.level - 2}rem` }">{{ anchor.title
-                }}</nuxt-link>
+                    }}</nuxt-link>
             </li>
         </ul>
         <a id="dictNavBtn" href="#"></a>

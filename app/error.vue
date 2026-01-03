@@ -15,7 +15,7 @@ function getErrorMessage(statusCode) {
         case 404:
             return 'page not found';
         case 500:
-            return 'nternal Server Error';
+            return 'Internal Server Error';
         default:
             return '';
     }
