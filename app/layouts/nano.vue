@@ -2,7 +2,7 @@
     <div :class="{ main: center, main2: !center }">
         <div class="header">
             <p class="links">
-                <nuxt-link to="/">arenot.cn</nuxt-link>&nbsp;&nbsp;<nuxt-link to="/about">About
+                <nuxt-link to="/">arenot.cn</nuxt-link>&nbsp;&nbsp;<nuxt-link v-if="props.About" to="/about">About
                     Me</nuxt-link>
                 <span class="caozuo">
                     <a @click="$emit('login')" :class="{ disabled: props.login?.disabled }"
@@ -74,6 +74,10 @@ const props = defineProps({
     logout: {
         type: Boolean,
         default: false
+    },
+    About: {
+        type: Boolean,
+        default: true
     }
 })
 function logout() {

@@ -173,6 +173,7 @@ function imgErrorReTry(event) {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    background-color: white;
 }
 
 .blog-card-tags {

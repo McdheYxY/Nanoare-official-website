@@ -5,7 +5,7 @@ useHead({
     title: 'Nanoare official website',
     meta: [
         {
-            name: 'description', content: 'Nanoare 的网络日志(blogs)、编程日记(notes)、作品合集(projects)发布页'
+            name: 'description', content: 'Nanoare 的网络日志(blogs)、编程日记(notes)、作品合集(projects)发布页。这里有许多有趣的科技话题，静候你来挖掘。此博客已开源。分享前端、Python、Java、Android和C/C++知识。记录作品从想法到诞生的整个周期。发布已开源作品演示。致力于打造一个充满趣味和匠心的灵感聚集地，激励更多开发者加入进来。'
         },
         {
             property: 'og:url', content: 'https://arenot.cn/'
@@ -17,7 +17,7 @@ useHead({
             property: 'og:title', content: 'ARENOT | Nanoare official website'
         },
         {
-            property: 'og:description', content: 'Nanoare 的网络日志(blogs)、编程日记(notes)、作品合集(projects)发布页'
+            property: 'og:description', content: 'Nanoare 的网络日志(blogs)、编程日记(notes)、作品合集(projects)发布页。这里有许多有趣的科技话题，静候你来挖掘。此博客已开源。分享前端、Python、Java、Android和C/C++知识。记录作品从想法到诞生的整个周期。发布已开源作品演示。致力于打造一个充满趣味和匠心的灵感聚集地，激励更多开发者加入进来。'
         },
         {
             property: 'og:image', content: 'https://arenot.cn/img/logo.png'

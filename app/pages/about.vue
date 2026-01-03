@@ -1,6 +1,6 @@
 <template>
   <div class="wrap-outer">
-    <nuxt-layout name="nano">
+    <nuxt-layout name="nano" :About="false">
       <template #title>
         About Me
       </template>

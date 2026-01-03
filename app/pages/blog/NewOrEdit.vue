@@ -3,6 +3,10 @@ const router = useRouter()
 const route = useRoute()
 const config = useRuntimeConfig()
 
+useHead({
+    title:"编辑"
+})
+
 const editMode = ref(false)
 /* markdown编辑器组件引用 */
 const editor = ref()
@@ -14,6 +18,7 @@ definePageMeta({
     alias: ['/blog/edit/:id?'],
     props: true,//(router) => ({ id: router.params?.id })
 })
+
 const props = defineProps({
     id: String
 })

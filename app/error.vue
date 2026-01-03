@@ -6,13 +6,27 @@ const props = defineProps({
     error: Object
 })
 // TODO 直接返回错误消息给用户是不友好的，但是为了有迹可循log输出一份完整报错还是有必要的
+function getErrorMessage(statusCode) {
+    switch (statusCode) {
+        case 400:
+            return 'Bad Request';
+        case 401:
+            return 'Unauthorized';
+        case 404:
+            return 'page not found';
+        case 500:
+            return 'nternal Server Error';
+        default:
+            return '';
+    }
+}
 </script>
 
 <template>
     <nuxt-layout name="nano">
         <div class="error-container">
             <div class="error-code">{{ props.error.statusCode }}</div>
-            <h1 class="error-msg">{{ props.error.message || '未知错误' }}</h1>
+            <h1 class="error-msg">{{ getErrorMessage(props.error.statusCode) || '未知错误' }}</h1>
             <NuxtLink class="btn" to="/">Back to home</NuxtLink>
         </div>
     </nuxt-layout>
