@@ -38,8 +38,6 @@ definePageMeta({
     },
 })
 
-const bgVideo = ref()
-
 onMounted(async () => {
 })
 
@@ -76,9 +74,9 @@ onMounted(async () => {
     height: 100%;
     max-height: 28rem;
     background-color: rgb(218, 232, 252, 0.5);
-    box-shadow: 0 0 9px 1px #5499de;
+    box-shadow: 0 0 9px 1px var(--bg-container);
     backdrop-filter: blur(1px);
-    border: 1px solid #5499de;
+    border: 1px solid var(--bg-container);
     position: absolute;
     top: 50%;
     left: 50%;

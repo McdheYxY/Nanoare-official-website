@@ -16,7 +16,7 @@
 .fade-in-up-leave-active,
 .fade-in-up-enter-active {
   overflow: hidden;
-  transition: opacity .2s cubic-bezier(.4, 0, .2, 1), transform .2s cubic-bezier(.4, 0, .2, 1) !important;
+  transition: opacity .15s cubic-bezier(.4, 0, .2, 1), transform .15s cubic-bezier(.4, 0, .2, 1) !important;
 }
 
 /* .fade-in-enter-from {
@@ -32,6 +32,6 @@
 .fade-in-leave-active,
 .fade-in-enter-active {
   overflow: hidden;
-  transition: opacity .2s cubic-bezier(.4, 0, .2, 1), transform .2s cubic-bezier(.4, 0, .2, 1) !important;
+  transition: opacity .15s cubic-bezier(.4, 0, .2, 1), transform .15s cubic-bezier(.4, 0, .2, 1) !important;
 }
 </style>
