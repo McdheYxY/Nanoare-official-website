@@ -33,7 +33,6 @@ export default defineNuxtConfig({
 		},
 	},
 	css: ["~~/node_modules/normalize.css/normalize.css", "~/assets/css/main.css"],
-
 	routeRules: {
 		"/blog/new": {
 			ssr: false, //关闭服务端渲染
@@ -51,7 +50,7 @@ export default defineNuxtConfig({
 	app: {
 		head: {
 			// title:'Nanoare',
-			titleTemplate: "Arenot | %s",
+			titleTemplate: "ARENOT | %s",
 			htmlAttrs: {
 				lang: "zh",
 			},

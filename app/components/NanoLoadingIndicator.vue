@@ -33,8 +33,8 @@ const strlist = computed(() =>
     ywz.value.innerText.split("\n")
 )
 let index = 0;
-const isLoading = computed(() => 
-loadingIndicator.isLoading.value
+const isLoading = computed(() =>
+    loadingIndicator.isLoading.value
 )
 
 
@@ -52,48 +52,56 @@ function animation() {
     index = index < strlist.value.length - 1 ? index + 1 : 0;
 }
 
-onMounted(() => {
-    animation()
-    loadingstr.value.addEventListener(
-        "animationiteration",
-        animation
-    );
-})
-
-onUnmounted(() => {
-    loadingstr.value.removeEventListener('animationiteration', animation)
-})
-
+if (import.meta.client) {
+    watch(isLoading, () => {
+        if (isLoading.value) {
+            lockScreen();
+            animation()
+            loadingstr.value.addEventListener(
+                "animationiteration",
+                animation
+            );
+        } else {
+            unlockScreen();
+            loadingstr.value.removeEventListener('animationiteration', animation)
+        }
+    })
+}
 </script>
 
 <style>
 :root {
     --delay: 1s;
 }
-.loading-container .msg{
+
+.loading-container .msg {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
 }
-.loading-container .msg p{
+
+.loading-container .msg p {
     text-align: center;
     opacity: 0;
     font-size: .7rem;
     color: #b3b3b3;
 }
-.loading-container .msg p:nth-child(1){
-    animation: 1s easein  ease-in 5s forwards;
-    
-}
-.loading-container .msg p:nth-child(2){
-    animation:2s easein  ease-in 8s forwards;
+
+.loading-container .msg p:nth-child(1) {
+    animation: 1s easein ease-in 5s forwards;
 
 }
-    
-.loading-container .msg p:nth-child(3){
+
+.loading-container .msg p:nth-child(2) {
+    animation: 2s easein ease-in 8s forwards;
+
+}
+
+.loading-container .msg p:nth-child(3) {
     animation: 2s easein ease-in 12s forwards;
 }
+
 .loading-container {
     position: fixed;
     background-color: var(--background-color);
@@ -114,7 +122,7 @@ onUnmounted(() => {
     position: absolute;
     left: 50vw;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
 .loading-container .loading p {
@@ -133,14 +141,17 @@ onUnmounted(() => {
     font-weight: 100;
     text-shadow: 0 0 6px #fff;
 }
+
 @keyframes easein {
     from {
         opacity: 0;
     }
-    to{
+
+    to {
         opacity: 1;
     }
 }
+
 @keyframes faceR {
     0% {
         opacity: 0;

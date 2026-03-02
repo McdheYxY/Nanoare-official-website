@@ -230,6 +230,7 @@ onMounted(async () => {
     #content a:hover {
         color: white;
         background-color: rgba(0, 0, 0, 0);
+        font-size: 1.2rem;
     }
 }
 
