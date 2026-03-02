@@ -88,12 +88,12 @@ function imgErrorReTry(event) {
 </script>
 <style>
 .blog-card {
-    box-sizing: border-box;
-    /* background-color: var(--card-background-color); */
     margin-bottom: 1rem;
     position: relative;
     padding: 3.5rem .3rem 1rem;
     letter-spacing: 0.05rem;
+    background-color: var(--background-color);
+    box-shadow: 0 0 10px 5px var(--background-color);
 }
 
 .blog-card-date {

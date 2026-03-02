@@ -79,8 +79,7 @@ body.nano-locked {
 	/* padding: 10px; */
 }
 .content {
-	background-color: var(--background-color);
-	box-shadow: 0 0 10px 5px var(--background-color);
+	
 }
 
 h1 {
@@ -129,11 +128,15 @@ a {
 
 article {
 	color: var(--article-text-color);
+	background-color: var(--background-color);
+	box-shadow: 0 0 10px 5px var(--background-color);
 }
 
 .comments {
 	padding-top: 2rem;
 	overflow: hidden;
+	background-color: var(--background-color);
+	box-shadow: 0 0 10px 5px var(--background-color);
 }
 
 .task-list-item {
