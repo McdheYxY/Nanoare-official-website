@@ -37,7 +37,7 @@ gitdcus.auth({
 
 /* 发送请求 */
 
-const { data: blog,status, error } = await useFetch(() => `/api/blogs/${route.params.id}`, { cache: false });
+const { data: blog, status, error } = await useFetch(() => `/api/blogs/${route.params.id}`, { cache: false });
 if (error.value) {
     if (import.meta.server)
         throw createError({
@@ -89,6 +89,47 @@ useHead({
             name: 'twitter:card', content: 'summary'
         },
     ],
+    script: [
+        {
+            type: 'application/ld+json', textContent: JSON.stringify(
+                {
+                    "@context": "https://schema.org/",
+                    "@type": "BlogPosting",
+                    "@id": `${config.public.LINK.endsWith("/") ? config.public.LINK : config.public.LINK + "/"}blog/${route.params.id}`,
+                    "headline": blogTitle.value,
+                    "description": blogAbstract.value,
+                    "author": {
+                        "@type": "Person",
+                        "@id": `${config.public.LINK.endsWith("/") ? config.public.LINK : config.public.LINK + "/"}about`,
+                        "name": config.public.AUTHOR,
+                        "url": `${config.public.LINK.endsWith("/") ? config.public.LINK : config.public.LINK + "/"}about`,
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "@id": config.public.LINK,
+                        "name": config.public.TL_OWNER,
+                        "url": config.public.LINK
+                    },
+                    "image": {
+                       
+                    },
+                    "isPartOf": {
+                        "@type": "Blog",
+                        "@id": `${config.public.LINK.endsWith("/") ? config.public.LINK : config.public.LINK + "/"}blog`,
+                        "name": config.public.AUTHOR,
+                        "publisher": {
+                            "@type": "Organization",
+                            "@id": config.public.LINK,
+                            "name": config.public.TL_OWNER,
+                        }
+                    },
+                    "datePublished": blogInfo.getISODate(blog.value.createdAt),
+                    "dateModified": blogInfo.getISODate(blog.value.updatedAt),
+                    "wordCount": markdown.value.length,
+                }
+            )
+        }
+    ]
 })
 
 let md = useMarkdownIt({

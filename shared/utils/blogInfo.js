@@ -21,7 +21,7 @@ function getAbstract(str) {
 	return s;
 }
 
-function getCover(baseUrl,owner,name, str) {
+function getCover(baseUrl, owner, name, str) {
 	let s = str.match(regexp);
 	if (s === null) return undefined;
 	s = s[3]?.trim();
@@ -36,6 +36,11 @@ function getDate(str) {
 		.toString()
 		.padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
 }
+
+function getISODate(str) {
+	const d = new Date(str);
+	return d.toISOString();
+}
 function getTime(str) {
 	const d = new Date(str);
 	return `${d.getHours().toString().padStart(2, "0")}:${d
@@ -48,4 +53,11 @@ function getTime(str) {
 // console.log("摘要", getAbstract(str));
 // console.log("封面", getCoverId(str));
 
-export default { getTitle, getAbstract, getCover, getDate, getTime };
+export default {
+	getTitle,
+	getAbstract,
+	getCover,
+	getDate,
+	getTime,
+	getISODate,
+};
