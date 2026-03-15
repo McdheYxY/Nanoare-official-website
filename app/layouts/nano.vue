@@ -34,6 +34,11 @@
                 |
                 <a href="https://afdian.com/a/nanoare" target="_blank">Support Me</a>
             </p>
+            <div id="footer">
+                <a href="https://icp.gov.moe/?keyword=20262050" target="_blank">萌ICP备20262050号</a>
+                <span>|</span>
+                <a href="https://icp.felicity.land/id.php?keyword=20261024" target="_blank">幸ICP备20261024号</a>
+            </div>
         </div>
     </div>
 
@@ -97,4 +102,14 @@ defineEmits(['new', 'save', 'delete', 'edit', 'login'])
     margin-inline-start: 1rem;
 }
 
+#footer {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+#footer a,span {
+    margin-inline-start: 0.5rem;
+    color: #6a7282;
+}
 </style>

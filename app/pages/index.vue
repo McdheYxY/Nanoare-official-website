@@ -65,6 +65,10 @@ onMounted(async () => {
                 <img src="/img/rss.svg">
             </a>
         </div>
+        <div id="footer">
+            <a href="https://icp.gov.moe/?keyword=20262050" target="_blank">萌ICP备20262050号</a>
+            <a href="https://icp.felicity.land/id.php?keyword=20261024" target="_blank">幸ICP备20261024号</a>
+        </div>
     </div>
 </template>
 <style scoped>
@@ -72,7 +76,7 @@ onMounted(async () => {
     max-width: 38rem;
     width: 100%;
     height: 100%;
-    max-height: 28rem;
+    max-height: 29rem;
     background-color: rgb(218, 232, 252, 0.5);
     box-shadow: 0 0 9px 1px var(--bg-container);
     backdrop-filter: blur(1px);
@@ -181,6 +185,15 @@ onMounted(async () => {
     margin: calc(0.3rem - 1px);
 }
 
+#footer {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#footer a {
+    margin-inline-start: 0.5rem;
+    color: #6a7282;
+}
 
 @media (max-width: 608px) {
     #container {
@@ -230,7 +243,7 @@ onMounted(async () => {
     #content a:hover {
         color: white;
         background-color: rgba(0, 0, 0, 0);
-        font-size: 1.rem;
+        font-size: 1.2rem;
     }
 }
 
